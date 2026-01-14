@@ -1,0 +1,1801 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3932359368392333"
+     crossorigin="anonymous"></script>
+<title>인생금융진단기</title>
+
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg:#f6f7fb;
+  --card:#ffffff;
+  --text:#0f172a;
+  --muted:#64748b;
+  --line:#e5e7eb;
+  --accent:#2563eb;
+  --good:#16a34a;
+  --warn:#f59e0b;
+  --bad:#dc2626;
+}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Malgun Gothic",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+.app{
+  max-width:430px;
+  margin:0 auto;
+  min-height:100vh;
+  background:var(--bg);
+}
+
+.app-header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:#ffffffee;
+  backdrop-filter: blur(8px);
+  border-bottom:1px solid var(--line);
+  padding:12px 14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.app-header .title{
+  font-weight:900;
+  font-size:16px;
+}
+.app-header .save-btn{
+  font-size:12px;
+  font-weight:900;
+  border-radius:10px;
+  padding:8px 10px;
+  border:1px solid var(--line);
+  background:#f1f5f9;
+  cursor:pointer;
+}
+
+.progress-bar{
+  background:#e5e7eb;
+  height:4px;
+  position:relative;
+}
+.progress-fill{
+  background:var(--accent);
+  height:100%;
+  transition:width 0.3s;
+}
+
+#alkLife{
+  min-height:100vh;
+  max-width:480px;
+  margin:0 auto;
+  background:#ffffff;
+}
+.screen{display:none;min-height:100vh;padding:20px 16px 120px}
+.screen.active{display:block}
+h1{font-size:22px;margin:0 0 10px}
+h2{font-size:18px;margin:0 0 8px}
+h3{font-size:16px;margin:0 0 8px}
+p{font-size:14px;line-height:1.6;color:var(--muted);margin:0 0 10px}
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px;
+  margin-bottom:12px;
+}
+.field{margin-bottom:12px;position:relative}
+.field label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
+.field input,.field select{
+  width:100%;
+  padding:14px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--text);
+  font-size:16px;
+  outline:none;
+}
+.field input:focus, .field select:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(37,99,235,0.1);
+}
+.field-hint{
+  font-size:12px;
+  color:var(--accent);
+  margin-top:4px;
+  font-weight:700;
+}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:520px){.row2{grid-template-columns:1fr}}
+.bottom-bar{
+  position:fixed;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:0;
+  width:100%;
+  max-width:430px;
+  background:#ffffffee;
+  border-top:1px solid var(--line);
+  padding:12px;
+  z-index:999;
+}
+.btn{
+  width:100%;
+  padding:16px;
+  border-radius:14px;
+  border:none;
+  font-size:16px;
+  font-weight:900;
+  background:var(--accent);
+  color:white;
+  cursor:pointer;
+  transition:all 0.2s;
+}
+.btn:active{transform:scale(0.98)}
+.btn.secondary{
+  background:#f1f5f9;
+  color:var(--text);
+  border:1px solid var(--line);
+}
+.btn.small{padding:10px 14px;font-size:14px}
+.small{font-size:12px;color:var(--muted);line-height:1.55}
+.big{font-size:20px;font-weight:950;line-height:1.25}
+.result-card{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px;
+  margin-bottom:10px;
+  background:#fff;
+}
+.result-card.best{
+  border-color:rgba(22,163,74,.55);
+  background:#f0fdf4;
+}
+.notice{
+  border:1px solid rgba(245,158,11,.35);
+  background:#fffbeb;
+  padding:12px;
+  border-radius:14px;
+  font-size:14px;
+  line-height:1.6;
+}
+.danger{
+  border:1px solid rgba(220,38,38,.25);
+  background:#fef2f2;
+  padding:12px;
+  border-radius:14px;
+  font-size:14px;
+  line-height:1.6;
+}
+.info{
+  border:1px solid rgba(37,99,235,.25);
+  background:#eff6ff;
+  padding:12px;
+  border-radius:14px;
+  font-size:14px;
+  line-height:1.6;
+}
+.chipgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:520px){.chipgrid{grid-template-columns:1fr}}
+.chip{
+  padding:14px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:#fff;
+  cursor:pointer;
+  font-weight:900;
+  transition:all 0.2s;
+}
+.chip:hover{border-color:var(--accent);background:#eff6ff}
+.chip.active{border-color:var(--accent);background:#eff6ff;border-width:2px}
+.chip small{display:block;color:var(--muted);font-weight:700;margin-top:6px;line-height:1.3}
+
+.custom-region{
+  display:none;
+  margin-top:12px;
+  padding:14px;
+  background:#f8fafc;
+  border-radius:12px;
+}
+.custom-region.active{display:block}
+
+.comparison-tabs{
+  display:flex;
+  gap:8px;
+  margin-bottom:12px;
+  overflow-x:auto;
+}
+.tab{
+  padding:10px 16px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:#fff;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:900;
+  white-space:nowrap;
+  transition:all 0.2s;
+}
+.tab.active{
+  background:var(--accent);
+  color:white;
+  border-color:var(--accent);
+}
+
+.bottleneck-list{
+  list-style:none;
+  padding:0;
+  margin:10px 0;
+}
+.bottleneck-list li{
+  padding:10px;
+  margin:6px 0;
+  border-radius:10px;
+  background:#f8fafc;
+  border-left:4px solid var(--line);
+}
+.bottleneck-list li.high{border-left-color:var(--bad)}
+.bottleneck-list li.med{border-left-color:var(--warn)}
+.bottleneck-list li.low{border-left-color:var(--good)}
+
+.event-selector{
+  margin-top:12px;
+  padding:14px;
+  background:#f8fafc;
+  border-radius:12px;
+}
+
+canvas{max-width:100%;height:auto}
+hr{border:none;border-top:1px solid var(--line);margin:12px 0}
+
+.cta-box{
+  border:1px dashed rgba(100,116,139,.35);
+  border-radius:14px;
+  padding:14px;
+  text-align:center;
+  background:#fff;
+}
+.cta-box a{
+  display:block;
+  padding:14px;
+  border-radius:12px;
+  background:#f1f5f9;
+  margin-top:10px;
+  color:var(--text);
+  text-decoration:none;
+  font-weight:950;
+}
+
+.highlight-box{
+  background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color:white;
+  padding:16px;
+  border-radius:14px;
+  margin:12px 0;
+}
+.highlight-box .big{color:white}
+
+/* 광고 영역 스타일 */
+.ad-slot {
+  margin: 20px 0;
+  padding: 16px;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 14px;
+  text-align: center;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ad-slot::before {
+  content: '광고';
+  font-size: 11px;
+  color: #94a3b8;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ad-placeholder {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.guide-links {
+  margin-top: 12px;
+  padding: 12px;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+}
+
+.guide-links h3 {
+  font-size: 14px;
+  margin: 0 0 8px 0;
+  color: var(--text);
+}
+
+.guide-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.guide-links li {
+  padding: 6px 0;
+  font-size: 13px;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+}
+
+.guide-links li:last-child {
+  border-bottom: none;
+}
+
+.guide-links li::before {
+  content: '•';
+  color: var(--accent);
+  font-weight: bold;
+  margin-right: 8px;
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+  <div class="app-header">
+    <div class="title">인생금융진단</div>
+    <button class="save-btn" onclick="saveAndShare()"> 저장/공유</button>
+  </div>
+
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill" style="width:0%"></div>
+  </div>
+
+  <div id="alkLife">
+
+<!-- ==================== STEP 0: 지역 선택 ==================== -->
+<section class="screen active" id="step0">
+  <h1>0단계: 지역 선택</h1>
+  <p>지역에 따라 <b>LTV/DSR</b>이 달라집니다.</p>
+
+  <div class="card">
+    <div class="chipgrid">
+      <div class="chip" onclick="selectRegion('seoul')">서울
+        <small>LTV 40 / DSR 40</small>
+      </div>
+      <div class="chip" onclick="selectRegion('gg_incheon')">경기·인천
+        <small>LTV 50 / DSR 40</small>
+      </div>
+      <div class="chip" onclick="selectRegion('metro_core')">광역시(과열)
+        <small>LTV 60 / DSR 45</small>
+      </div>
+      <div class="chip" onclick="selectRegion('metro')">광역시(일반)
+        <small>LTV 70 / DSR 45</small>
+      </div>
+      <div class="chip" onclick="selectRegion('local_city')">지방 도시
+        <small>LTV 75 / DSR 50</small>
+      </div>
+      <div class="chip" onclick="selectRegion('local')">지방(기타)
+        <small>LTV 80 / DSR 50</small>
+      </div>
+    </div>
+
+    <div style="margin-top:12px">
+      <div class="chip" onclick="selectRegion('custom')">✏️ 기타 (직접입력)
+        <small>내 조건에 맞게 LTV/DSR 설정</small>
+      </div>
+    </div>
+
+    <div class="custom-region" id="customRegion">
+      <div class="field">
+        <label>LTV (%)</label>
+        <input type="number" id="customLTV" placeholder="예: 60" min="0" max="100">
+      </div>
+      <div class="field">
+        <label>DSR (%)</label>
+        <input type="number" id="customDSR" placeholder="예: 45" min="0" max="100">
+      </div>
+    </div>
+
+    <div class="notice" id="regionBox" style="margin-top:12px;display:none"></div>
+  </div>
+
+  <div class="bottom-bar">
+    <button class="btn" onclick="showStep(1)">다음 ▶ 내 소득/지출</button>
+  </div>
+</section>
+
+<!-- ==================== STEP 1: 소득/지출 ==================== -->
+<section class="screen" id="step1">
+  <h1>1단계: 내 체력 입력</h1>
+  <p>은행이 보는 건 "감정"이 아니라 <b>숫자</b>입니다.</p>
+
+  <div class="card">
+    <div class="field">
+      <label>연 소득 (세전, 만원)</label>
+      <input type="text" id="yearIncome" placeholder="예: 5,000" data-number>
+      <div class="field-hint" id="incomeHint"></div>
+    </div>
+
+    <div class="field">
+      <label>지금 통장에 있는 돈 (구매자금 제외,만원)</label>
+      <input type="text" id="cash" placeholder="예: 10,000" data-number>
+      <div class="field-hint" id="cashHint"></div>
+    </div>
+
+    <div class="field">
+      <label>매달 고정지출 (만원)</label>
+      <input type="text" id="expense" placeholder="예: 250" data-number>
+      <div class="field-hint" id="expenseHint"></div>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <button class="btn" onclick="showStep(2)">다음 ▶ 집 조건</button>
+    <div style="height:8px"></div>
+    <button class="btn secondary" onclick="showStep(0)">이전</button>
+  </div>
+</section>
+
+<!-- ==================== STEP 2: 집/대출 조건 ==================== -->
+<section class="screen" id="step2">
+  <h1>2단계: 집 & 규제 검사</h1>
+  <p>여기서 <b>DSR/LTV</b>를 통과해야 시뮬이 돌아갑니다.</p>
+
+  <div class="card">
+    <div class="field">
+      <label>집 가격 (만원)</label>
+      <input type="text" id="housePrice" placeholder="예: 60,000" data-number>
+      <div class="field-hint" id="housePriceHint"></div>
+    </div>
+
+    <div class="field">
+      <label>내가 넣을 돈 (만원)</label>
+      <input type="text" id="myMoney" placeholder="예: 20,000" data-number>
+      <div class="field-hint" id="myMoneyHint"></div>
+    </div>
+
+    <div class="row2">
+      <div class="field">
+        <label>대출 금리 (연 %)</label>
+        <input type="text" id="rate" placeholder="예: 4.2">
+      </div>
+      <div class="field">
+        <label>대출 기간</label>
+        <select id="loanYears">
+          <option value="10">10년</option>
+          <option value="15">15년</option>
+          <option value="20">20년</option>
+          <option value="25">25년</option>
+          <option value="30" selected>30년</option>
+          <option value="35">35년</option>
+          <option value="40">40년</option>
+          <option value="45">45년</option>
+          <option value="50">50년</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="notice" id="ruleInfo">
+      지역을 먼저 선택하면, LTV/DSR이 자동 적용됩니다.
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <button class="btn" onclick="checkDSRLTV()">다음 ▶ 진단 실행</button>
+    <div style="height:8px"></div>
+    <button class="btn secondary" onclick="showStep(1)">이전</button>
+  </div>
+</section>
+
+<!-- ==================== STEP 3: 결과 ==================== -->
+<section class="screen" id="step3">
+  <h1>3단계: 5년 인생 시뮬 결과</h1>
+
+  <div class="card">
+    <div class="big" id="summaryLine">-</div>
+    <p id="summarySub">-</p>
+  </div>
+
+  <!-- 인생 구조 요약 -->
+  <div class="card" id="lifeStructureCard">
+    <h2>🧾 당신의 인생 구조 요약</h2>
+    <div id="lifeStructureText" class="small">-</div>
+  </div>
+
+  <!-- 병목 우선순위 리스트 -->
+  <div class="card" id="bottleneckCard">
+    <h2>🚨 인생 병목 순위</h2>
+    <ul class="bottleneck-list" id="bottleneckList">
+      <li>-</li>
+    </ul>
+  </div>
+
+  <!-- 🎯 광고 위치 1: 병목 진단 직후 -->
+  <div class="guide-links">
+    <h3>💡 관련 가이드</h3>
+    <ul>
+      <li>대출 조건 개선하는 실전 방법</li>
+      <li>정부지원 대출 자격 확인하기</li>
+      <li>DSR/LTV 통과 전략 총정리</li>
+    </ul>
+  </div>
+  
+  <div class="ad-slot" id="adSlot1">
+    <!-- 여기에 애드센스 코드 삽입 -->
+    <div class="ad-placeholder">
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3932359368392333"
+     crossorigin="anonymous"></script>
+<!-- 깃허브 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3932359368392333"
+     data-ad-slot="8728890803"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    </div>
+  </div>
+
+  <!-- 대안 제시 -->
+  <div class="card" id="solutionCard">
+    <h2>💡 해결 방안 (자동 제안)</h2>
+    <div id="solutionText" class="small">-</div>
+  </div>
+
+  <!-- 안전 최소 내돈 -->
+  <div class="card" id="goalCard">
+    <h2>🎯 "안전하게" 살려면 필요한 최소 내 돈</h2>
+    <div class="small" id="goalText">-</div>
+    <div class="small">※ 안전 기준: 5년 동안 <b>통장 마이너스 없음</b> + <b>최저 잔고 ≥ 3개월치 지출</b></div>
+  </div>
+
+  <!-- 🔥 핵심: 비교 탭 -->
+  <div class="card">
+    <h2>⚖️ 한눈에 비교하기</h2>
+    <div class="comparison-tabs">
+      <div class="tab active" onclick="showComparison('loanYears')">📊 대출기간</div>
+      <div class="tab" onclick="showComparison('interest')">🔥 이자 태운 돈</div>
+      <div class="tab" onclick="showComparison('opportunity')">💰 기회비용</div>
+      <div class="tab" onclick="showComparison('rateChange')">📈 변동금리</div>
+    </div>
+    <div id="comparisonContent">-</div>
+    
+    <!-- 🎯 광고 위치 2: 이자 비교 탭 하단 (동적 삽입) -->
+    <div id="comparisonAdSlot"></div>
+  </div>
+
+  <!-- 이벤트 시뮬레이션 -->
+  <div class="card">
+    <h2>🧪 이벤트 시뮬레이션</h2>
+    <p class="small">예상치 못한 상황에 얼마나 버틸 수 있을까요?</p>
+    
+    <div class="event-selector">
+      <div class="field">
+        <label>이벤트 종류</label>
+        <select id="eventType">
+          <option value="none">없음 (기본)</option>
+          <option value="jobLoss3">실직 3개월</option>
+          <option value="jobLoss6">실직 6개월</option>
+          <option value="jobLoss12">실직 12개월</option>
+          <option value="baby">육아 (+월 100만원, 3년)</option>
+          <option value="emergency">긴급 지출 (1,000만원)</option>
+        </select>
+      </div>
+      <button class="btn small" onclick="runEventSimulation()">시뮬 실행</button>
+    </div>
+    <div id="eventResult" style="margin-top:12px"></div>
+  </div>
+
+  <!-- 숫자 실험 -->
+  <div class="card" id="changeOneNumberCard">
+    <h2>🧪 숫자 하나만 바꿔서 인생 실험</h2>
+    <p class="small">버튼을 누르면 <b>즉시 재계산</b>됩니다.</p>
+    <div class="row2" style="margin-top:10px">
+      <button class="btn secondary" onclick="quickExperiment('priceDown10')">집값 -10%</button>
+      <button class="btn secondary" onclick="quickExperiment('moneyUp3000')">내 돈 +3,000만</button>
+    </div>
+    <div style="height:10px"></div>
+    <div class="row2">
+      <button class="btn secondary" onclick="quickExperiment('loanYearsUp10')">대출기간 +10년</button>
+      <button class="btn" onclick="resetExperiment()">실험 리셋</button>
+    </div>
+    <p class="small" id="experimentHint" style="margin-top:10px">-</p>
+  </div>
+
+  <div id="warnBox"></div>
+
+  <!-- 선택지 비교 -->
+  <div class="card">
+    <h2>📌 선택지 비교</h2>
+    <div id="resultCards"></div>
+  </div>
+
+  <!-- 5년 통장 흐름 -->
+  <div class="card">
+    <h2>📈 5년 통장 흐름 (만원)</h2>
+    <canvas id="cashChart" height="180"></canvas>
+    <p class="small">※ 그래프는 "월말 통장 잔고"의 변화입니다.</p>
+  </div>
+
+  <!-- 설명 -->
+  <div class="card">
+    <h2>🤔 이 결과를 쉽게 말하면</h2>
+    <p id="explainText">-</p>
+  </div>
+
+  <!-- 🎯 광고 위치 3: 결과 최하단 -->
+  <div class="card cta-box">
+    <b>🎓 더 알아보면 좋을 주제</b>
+    <ul style="list-style:none;padding:0;margin:10px 0;text-align:left">
+      <li style="padding:6px 0;font-size:13px">• 주택담보대출 완벽 가이드</li>
+      <li style="padding:6px 0;font-size:13px">• 생애최초 특례대출 총정리</li>
+      <li style="padding:6px 0;font-size:13px">• 부동산 투자 시뮬레이터</li>
+    </ul>
+  </div>
+
+  <div class="ad-slot" id="adSlot3">
+    <!-- 여기에 애드센스 코드 삽입 -->
+    <div class="ad-placeholder">
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3932359368392333"
+     crossorigin="anonymous"></script>
+<!-- 깃허브 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-3932359368392333"
+     data-ad-slot="8728890803"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    </div>
+  </div>
+
+  <div class="card" style="text-align:center;padding:20px">
+    <p style="color:var(--muted);font-size:13px;margin:0 0 12px">
+      이 진단 결과가 도움이 되셨나요?<br>
+      저장하고 친구와 공유해보세요!
+    </p>
+    <button class="btn" onclick="saveAndShare()"> 결과 공유하기</button>
+  </div>
+
+  <div class="bottom-bar">
+    <button class="btn secondary" onclick="showStep(2)">⬅ 조건 바꿔서 다시</button>
+  </div>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+<script>
+/* =========================================================
+   저장/복원
+========================================================= */
+function _encodeState(obj){
+  try{
+    return btoa(unescape(encodeURIComponent(JSON.stringify(obj))));
+  }catch(e){
+    return btoa(encodeURIComponent(JSON.stringify(obj)));
+  }
+}
+function _decodeState(s){
+  try{
+    return JSON.parse(decodeURIComponent(escape(atob(s))));
+  }catch(e){
+    return JSON.parse(decodeURIComponent(atob(s)));
+  }
+}
+
+function _collectStateForShare(){
+  const state = {
+    v: 2,
+    t: Date.now(),
+    regionKey: CURRENT_REGION_KEY,
+    customLTV: CURRENT_REGION && CURRENT_REGION.custom ? CURRENT_REGION.ltv : null,
+    customDSR: CURRENT_REGION && CURRENT_REGION.custom ? CURRENT_REGION.dsr : null,
+    fields: {
+      yearIncome: (document.getElementById("yearIncome")||{}).value || "",
+      cash: (document.getElementById("cash")||{}).value || "",
+      expense: (document.getElementById("expense")||{}).value || "",
+      housePrice: (document.getElementById("housePrice")||{}).value || "",
+      myMoney: (document.getElementById("myMoney")||{}).value || "",
+      rate: (document.getElementById("rate")||{}).value || "",
+      loanYears: (document.getElementById("loanYears")||{}).value || "30"
+    },
+    simInput: window.__SIM_INPUT__ || null,
+    baseInput: window.__BASE_INPUT__ || null
+  };
+  return state;
+}
+
+function saveAndShare(){
+  const state = _collectStateForShare();
+  const enc = _encodeState(state);
+  const url = location.origin + location.pathname + "?s=" + encodeURIComponent(enc);
+
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(()=>{
+      alert("✅ 링크가 복사되었습니다!\n\n이 링크로 들어오면 입력/결과가 복원됩니다.");
+    }).catch(()=>{
+      prompt("아래 링크를 복사하세요:", url);
+    });
+  }else{
+    prompt("아래 링크를 복사하세요:", url);
+  }
+}
+
+(function restoreFromURL(){
+  const params = new URLSearchParams(location.search);
+  const s = params.get("s");
+  if(!s) return;
+
+  let state = null;
+  try{
+    state = _decodeState(decodeURIComponent(s));
+  }catch(e){
+    console.warn("restore failed", e);
+    return;
+  }
+
+  try{
+    const f = (state && state.fields) ? state.fields : {};
+    if(document.getElementById("yearIncome")) document.getElementById("yearIncome").value = f.yearIncome || "";
+    if(document.getElementById("cash")) document.getElementById("cash").value = f.cash || "";
+    if(document.getElementById("expense")) document.getElementById("expense").value = f.expense || "";
+    if(document.getElementById("housePrice")) document.getElementById("housePrice").value = f.housePrice || "";
+    if(document.getElementById("myMoney")) document.getElementById("myMoney").value = f.myMoney || "";
+    if(document.getElementById("rate")) document.getElementById("rate").value = f.rate || "";
+    if(document.getElementById("loanYears")) document.getElementById("loanYears").value = f.loanYears || "30";
+
+    if(state.regionKey){
+      if(state.regionKey === 'custom' && state.customLTV && state.customDSR){
+        document.getElementById("customLTV").value = state.customLTV;
+        document.getElementById("customDSR").value = state.customDSR;
+      }
+      selectRegion(state.regionKey);
+    }
+
+    window.__SIM_INPUT__ = state.simInput || null;
+    window.__BASE_INPUT__ = state.baseInput || null;
+
+    if(window.__SIM_INPUT__){
+      runLifeSimulation();
+    }else{
+      showStep(state.regionKey ? 1 : 0);
+    }
+  }catch(e){
+    console.warn("restore apply failed", e);
+  }
+})();
+
+/* =========================================================
+   지역 규칙
+========================================================= */
+const REGION_RULES = {
+  seoul:       { name:"서울",              ltv:40, dsr:40, note:"규제 최상급" },
+  gg_incheon:  { name:"경기·인천",   ltv:50, dsr:40, note:"서울급 난이도" },
+  metro_core:  { name:"광역시(과열)", ltv:60, dsr:45, note:"지출 구조가 약하면 즉사" },
+  metro:       { name:"광역시(일반)",       ltv:70, dsr:45, note:"대부분 여기서 계산됨" },
+  local_city:  { name:"지방 도시",         ltv:75, dsr:50, note:"집보다 인생 구조가 먼저" },
+  local:       { name:"지방(기타)",        ltv:80, dsr:50, note:"대출은 쉬워도 빠져나오기 어려움" },
+};
+let CURRENT_REGION = null;
+let CURRENT_REGION_KEY = null;
+
+/* =========================================================
+   공통 유틸
+========================================================= */
+function showStep(n){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  const target = document.getElementById("step"+n);
+  if(target) target.classList.add("active");
+  
+  const progress = (n / 3) * 100;
+  document.getElementById("progressFill").style.width = progress + "%";
+  
+  window.scrollTo(0,0);
+}
+
+function formatNumberInput(el){
+  el.addEventListener("input", function(){
+    let v = (this.value||"").replace(/,/g,'').replace(/[^\d]/g,'');
+    if(!v){ this.value=""; return; }
+    this.value = v.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  });
+}
+document.querySelectorAll("[data-number]").forEach(formatNumberInput);
+
+function parseNum(id){
+  const el = document.getElementById(id);
+  if(!el) return 0;
+  const v = (el.value||"").replace(/,/g,'').trim();
+  if(!v) return 0;
+  const n = Number(v);
+  return Number.isFinite(n) ? n : 0;
+}
+function won(n){ return `${Math.floor(n).toLocaleString()}만원`; }
+
+function annuityPayment(principal, annualRatePct, years){
+  if(principal<=0) return 0;
+  const r = (annualRatePct/100)/12;
+  const n = years*12;
+  if(r===0) return principal/n;
+  const pow = Math.pow(1+r,n);
+  return principal * r * pow / (pow-1);
+}
+function maxLoanFromMonthlyPay(maxMonthlyPay, annualRatePct, years){
+  const r = (annualRatePct/100)/12;
+  const n = years*12;
+  if(r===0) return maxMonthlyPay*n;
+  const pow = Math.pow(1+r,n);
+  return maxMonthlyPay * (pow-1) / (r*pow);
+}
+
+/* =========================================================
+   실시간 피드백
+========================================================= */
+function setupRealtimeFeedback(){
+  const yearIncomeEl = document.getElementById("yearIncome");
+  const cashEl = document.getElementById("cash");
+  const expenseEl = document.getElementById("expense");
+  const housePriceEl = document.getElementById("housePrice");
+  const myMoneyEl = document.getElementById("myMoney");
+  
+  if(yearIncomeEl){
+    yearIncomeEl.addEventListener("input", ()=>{
+      const income = parseNum("yearIncome");
+      const hint = document.getElementById("incomeHint");
+      if(income > 0){
+        const monthly = income / 12;
+        hint.innerHTML = `💡 월 소득: ${monthly.toFixed(0)}만원`;
+        if(CURRENT_REGION){
+          const maxMonthPay = (income * (CURRENT_REGION.dsr/100)) / 12;
+          hint.innerHTML += ` / DSR ${CURRENT_REGION.dsr}% 한도: 월 ${maxMonthPay.toFixed(0)}만원`;
+        }
+      }else{
+        hint.innerHTML = "";
+      }
+    });
+  }
+  
+  if(cashEl){
+    cashEl.addEventListener("input", ()=>{
+      const cash = parseNum("cash");
+      const expense = parseNum("expense");
+      const hint = document.getElementById("cashHint");
+      if(cash > 0 && expense > 0){
+        const months = cash / expense;
+        hint.innerHTML = `💡 현재 현금으로 ${months.toFixed(1)}개월치 생활비`;
+      }else{
+        hint.innerHTML = "";
+      }
+    });
+  }
+  
+  if(expenseEl){
+    expenseEl.addEventListener("input", ()=>{
+      const cash = parseNum("cash");
+      const expense = parseNum("expense");
+      const hint = document.getElementById("expenseHint");
+      if(cash > 0 && expense > 0){
+        const months = cash / expense;
+        hint.innerHTML = `💡 현재 현금으로 ${months.toFixed(1)}개월치`;
+      }else{
+        hint.innerHTML = "";
+      }
+    });
+  }
+  
+  if(housePriceEl && myMoneyEl){
+    const updateHouseHints = ()=>{
+      const housePrice = parseNum("housePrice");
+      const myMoney = parseNum("myMoney");
+      const cash = parseNum("cash");
+      
+      const houseHint = document.getElementById("housePriceHint");
+      const moneyHint = document.getElementById("myMoneyHint");
+      
+      if(housePrice > 0 && myMoney > 0){
+        const ratio = (myMoney / housePrice) * 100;
+        houseHint.innerHTML = `💡 내 돈 비율: ${ratio.toFixed(0)}%`;
+        
+        const afterCash = cash - myMoney;
+        if(afterCash < 0){
+          moneyHint.innerHTML = `⚠️ 현금 부족 ${Math.abs(afterCash).toLocaleString()}만원`;
+        }else{
+          const expense = parseNum("expense");
+          if(expense > 0){
+            const months = afterCash / expense;
+            moneyHint.innerHTML = `💡 구매 후 남는 현금: ${afterCash.toLocaleString()}만원 (${months.toFixed(1)}개월치)`;
+          }else{
+            moneyHint.innerHTML = `💡 구매 후 남는 현금: ${afterCash.toLocaleString()}만원`;
+          }
+        }
+      }else{
+        houseHint.innerHTML = "";
+        moneyHint.innerHTML = "";
+      }
+    };
+    
+    housePriceEl.addEventListener("input", updateHouseHints);
+    myMoneyEl.addEventListener("input", updateHouseHints);
+  }
+}
+
+/* =========================================================
+   지역 선택
+========================================================= */
+function selectRegion(key){
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  
+  if(key === 'custom'){
+    const customDiv = document.getElementById("customRegion");
+    customDiv.classList.add("active");
+    
+    event.target.closest('.chip').classList.add('active');
+    
+    CURRENT_REGION_KEY = 'custom';
+    
+    const applyCustom = ()=>{
+      const ltv = Number(document.getElementById("customLTV").value || 0);
+      const dsr = Number(document.getElementById("customDSR").value || 0);
+      
+      if(ltv > 0 && dsr > 0){
+        CURRENT_REGION = {
+          name: "기타(직접입력)",
+          ltv: ltv,
+          dsr: dsr,
+          note: "사용자 지정 규제",
+          custom: true
+        };
+        
+        updateRegionDisplay();
+      }
+    };
+    
+    document.getElementById("customLTV").addEventListener("change", applyCustom);
+    document.getElementById("customDSR").addEventListener("change", applyCustom);
+    
+    return;
+  }
+  
+  document.getElementById("customRegion").classList.remove("active");
+  
+  CURRENT_REGION = REGION_RULES[key];
+  CURRENT_REGION_KEY = key;
+  
+  event.target.closest('.chip').classList.add('active');
+  
+  updateRegionDisplay();
+}
+
+function updateRegionDisplay(){
+  const box = document.getElementById("regionBox");
+  box.style.display = "block";
+  box.innerHTML = `
+    <b>선택 지역:</b> ${CURRENT_REGION.name}<br>
+    <b>적용 규제:</b> LTV ${CURRENT_REGION.ltv}% / DSR ${CURRENT_REGION.dsr}%<br>
+    <span class="small">${CURRENT_REGION.note}</span>
+  `;
+
+  const ruleInfo = document.getElementById("ruleInfo");
+  if(ruleInfo){
+    ruleInfo.innerHTML = `
+      <b>${CURRENT_REGION.name}</b> 기준 적용<br>
+      LTV <b>${CURRENT_REGION.ltv}%</b>, DSR <b>${CURRENT_REGION.dsr}%</b><br>
+      <span class="small">${CURRENT_REGION.note}</span>
+    `;
+  }
+}
+
+/* =========================================================
+   DSR/LTV 검사
+========================================================= */
+function checkDSRLTV(){
+  if(!CURRENT_REGION){
+    alert("먼저 0단계에서 지역을 선택해주세요!");
+    showStep(0);
+    return;
+  }
+
+  const yearIncome = parseNum("yearIncome");
+  const cash = parseNum("cash");
+  const expense = parseNum("expense");
+
+  const housePrice = parseNum("housePrice");
+  const myMoney = parseNum("myMoney");
+  const rate = Number((document.getElementById("rate").value||"").trim());
+  const loanYears = Number(document.getElementById("loanYears").value);
+
+  const ltv = CURRENT_REGION.ltv;
+  const dsr = CURRENT_REGION.dsr;
+
+  if(!yearIncome || !cash || !expense){
+    alert("1단계(연소득/현금/월지출)를 먼저 입력해주세요.");
+    showStep(1);
+    return;
+  }
+  if(!housePrice || !rate){
+    alert("2단계(집가격/금리)를 입력해주세요.");
+    return;
+  }
+  if(myMoney > housePrice){
+    alert("내가 넣을 돈이 집 가격보다 큽니다.");
+    return;
+  }
+
+  const needLoan = Math.max(0, housePrice - myMoney);
+
+  const maxLoanByLTV = housePrice * (ltv/100);
+
+  const maxYearPay = yearIncome * (dsr/100);
+  const maxMonthPay = maxYearPay / 12;
+
+  const maxLoanByDSR = maxLoanFromMonthlyPay(maxMonthPay, rate, loanYears);
+
+  const realMaxLoan = Math.min(maxLoanByLTV, maxLoanByDSR);
+
+  const reasons = [];
+  if(needLoan > maxLoanByLTV){
+    reasons.push(`LTV ${ltv}%: 이 집은 최대 ${won(maxLoanByLTV)}까지만 대출 가능`);
+  }
+  if(needLoan > maxLoanByDSR){
+    reasons.push(`DSR ${dsr}%: 월 상환 한도(${won(maxMonthPay)}) 때문에 약 ${won(maxLoanByDSR)}까지만 가능`);
+  }
+
+  if(reasons.length){
+    let msg = "❌ 냉정하게 말하면, 지금 조건으로는 막힙니다.\n\n";
+    reasons.forEach(r=> msg += "• " + r + "\n");
+    msg += `\n👉 가능한 최대 대출: ${won(realMaxLoan)}`;
+    msg += `\n👉 이 조건에서 가능한 최대 집값: ${won(realMaxLoan + myMoney)}`;
+    alert(msg);
+    return;
+  }
+
+  const monthlyPay = annuityPayment(needLoan, rate, loanYears);
+
+  window.__SIM_INPUT__ = {
+    region: CURRENT_REGION.name,
+    ltv, dsr,
+    yearIncome, cash, expense,
+    housePrice, myMoney,
+    rate, loanYears,
+    needLoan, monthlyPay,
+    maxLoanByLTV, maxLoanByDSR, realMaxLoan,
+    maxMonthPay
+  };
+
+  window.__BASE_INPUT__ = null;
+
+  runLifeSimulation();
+}
+
+/* =========================================================
+   진단 (병목 우선순위)
+========================================================= */
+function diagnose(inp){
+  const {
+    region, ltv, dsr,
+    yearIncome, cash, expense,
+    housePrice, myMoney,
+    rate, loanYears,
+    needLoan, monthlyPay,
+    maxLoanByLTV, maxLoanByDSR, realMaxLoan, maxMonthPay
+  } = inp;
+
+  const structureLines = [];
+  structureLines.push(`• 지역: <b>${region}</b> (LTV ${ltv}% / DSR ${dsr}%)`);
+  structureLines.push(`• 연소득(세전): <b>${won(yearIncome)}</b>`);
+  structureLines.push(`• DSR ${dsr}% → 월 상환 한도: <b>${won(maxMonthPay)}</b>`);
+  structureLines.push(`• (DSR 기준) 가능한 최대 대출: <b>${won(maxLoanByDSR)}</b>`);
+  structureLines.push(`• (LTV 기준) 이 집 최대 대출: <b>${won(maxLoanByLTV)}</b>`);
+  structureLines.push(`• 실제 가능한 최대 대출: <b>${won(realMaxLoan)}</b>`);
+  structureLines.push(`• 집 가격: <b>${won(housePrice)}</b> / 내 돈: <b>${won(myMoney)}</b>`);
+  structureLines.push(`• 필요 대출: <b>${won(needLoan)}</b> / 월 상환액: <b>${won(monthlyPay)}</b>`);
+
+  const dsrUsage = maxLoanByDSR > 0 ? (needLoan / maxLoanByDSR) : 0;
+  const ltvUsage = maxLoanByLTV > 0 ? (needLoan / maxLoanByLTV) : 0;
+
+  const cashAfterDown = Math.max(0, cash - myMoney);
+  const runwayMonths = expense > 0 ? (cashAfterDown / expense) : 999;
+  const downRatio = housePrice > 0 ? (myMoney / housePrice) : 0;
+
+  const bottlenecks = [];
+
+  if(dsrUsage >= 0.9){
+    bottlenecks.push({
+      level: "high",
+      title: "DSR(상환능력) 병목",
+      desc: `연소득 대비 월 상환 한도에 ${(dsrUsage*100).toFixed(0)}% 도달. 금리/기간 조정 필요.`,
+      score: dsrUsage * 100
+    });
+  }else if(dsrUsage >= 0.7){
+    bottlenecks.push({
+      level: "med",
+      title: "DSR 주의",
+      desc: `월 상환 한도 ${(dsrUsage*100).toFixed(0)}% 사용 중. 여유 있음.`,
+      score: dsrUsage * 80
+    });
+  }
+
+  if(ltvUsage >= 0.9){
+    bottlenecks.push({
+      level: "high",
+      title: "LTV(담보한도) 병목",
+      desc: `담보 한도에 ${(ltvUsage*100).toFixed(0)}% 도달. 집값 조정 또는 내 돈 추가 필요.`,
+      score: ltvUsage * 100
+    });
+  }
+
+  if(runwayMonths < 3){
+    bottlenecks.push({
+      level: "high",
+      title: "현금 방어력 위험",
+      desc: `구매 후 남는 현금이 ${runwayMonths.toFixed(1)}개월치 지출. 변수 하나면 흔들림.`,
+      score: (6 - runwayMonths) * 20
+    });
+  }else if(runwayMonths < 6){
+    bottlenecks.push({
+      level: "med",
+      title: "현금 방어력 부족",
+      desc: `구매 후 ${runwayMonths.toFixed(1)}개월치 현금. 최소 6개월치 확보 권장.`,
+      score: (6 - runwayMonths) * 15
+    });
+  }
+
+  if(downRatio < 0.2){
+    bottlenecks.push({
+      level: "high",
+      title: "내 돈 비중 낮음",
+      desc: `내 돈 ${(downRatio*100).toFixed(0)}%. 대출 의존도 높아 금리 변동에 취약.`,
+      score: (0.3 - downRatio) * 100
+    });
+  }else if(downRatio < 0.3){
+    bottlenecks.push({
+      level: "med",
+      title: "내 돈 비중 주의",
+      desc: `내 돈 ${(downRatio*100).toFixed(0)}%. 여유 있지만 더 높이면 안정적.`,
+      score: (0.3 - downRatio) * 50
+    });
+  }
+
+  bottlenecks.sort((a,b) => b.score - a.score);
+
+  if(bottlenecks.length === 0){
+    bottlenecks.push({
+      level: "low",
+      title: "선택의 문제",
+      desc: "규제는 통과. 지금 사느냐 / 2년 뒤 사느냐가 미래를 가릅니다."
+    });
+  }
+
+  return { structureLines, bottlenecks, dsrUsage, ltvUsage, runwayMonths, downRatio };
+}
+
+/* =========================================================
+   대안 제시
+========================================================= */
+function suggestSolutions(inp, diagnosis){
+  const solutions = [];
+  
+  const { dsrUsage, ltvUsage, runwayMonths, downRatio } = diagnosis;
+  const { loanYears, needLoan, rate, monthlyPay, expense, cash, myMoney } = inp;
+  
+  if(dsrUsage >= 0.85){
+    const newYears = Math.min(50, loanYears + 10);
+    const newPayment = annuityPayment(needLoan, rate, newYears);
+    solutions.push({
+      icon: "✅",
+      title: "대출기간 연장",
+      desc: `${loanYears}년 → ${newYears}년으로 늘리면 월 상환액 ${won(monthlyPay)} → ${won(newPayment)} (${won(monthlyPay - newPayment)} 절감)`
+    });
+  }
+  
+  if(runwayMonths < 6){
+    const needCash = expense * 6;
+    const reduceMoney = Math.max(0, needCash - (cash - myMoney));
+    if(reduceMoney > 0 && reduceMoney < myMoney){
+      solutions.push({
+        icon: "✅",
+        title: "초기자금 조정",
+        desc: `내 돈을 ${won(reduceMoney)} 줄여서 안전 현금(6개월치) 확보`
+      });
+    }
+  }
+  
+  const reduceExpense = expense * 0.2;
+  solutions.push({
+    icon: "💡",
+    title: "지출 최적화",
+    desc: `월 지출 ${won(reduceExpense)} 줄이면 5년 후 잔고 약 ${won(reduceExpense * 60)} 개선`
+  });
+  
+  return solutions;
+}
+
+/* =========================================================
+   실험 기능
+========================================================= */
+window.__BASE_INPUT__ = null;
+
+function quickExperiment(type){
+  if(!window.__SIM_INPUT__) return;
+
+  if(!window.__BASE_INPUT__){
+    window.__BASE_INPUT__ = JSON.parse(JSON.stringify(window.__SIM_INPUT__));
+  }
+  const base = JSON.parse(JSON.stringify(window.__BASE_INPUT__));
+
+  if(type === "priceDown10"){
+    base.housePrice = Math.max(0, Math.round(base.housePrice * 0.9));
+  }
+  if(type === "moneyUp3000"){
+    base.myMoney = base.myMoney + 3000;
+    if(base.myMoney > base.housePrice) base.myMoney = base.housePrice;
+  }
+  if(type === "loanYearsUp10"){
+    base.loanYears = Math.min(50, base.loanYears + 10);
+  }
+
+  const needLoan = Math.max(0, base.housePrice - base.myMoney);
+  const maxLoanByLTV = base.housePrice * (base.ltv/100);
+  const maxYearPay = base.yearIncome * (base.dsr/100);
+  const maxMonthPay = maxYearPay / 12;
+  const monthlyPay = annuityPayment(needLoan, base.rate, base.loanYears);
+  const maxLoanByDSR = maxLoanFromMonthlyPay(maxMonthPay, base.rate, base.loanYears);
+  const realMaxLoan = Math.min(maxLoanByLTV, maxLoanByDSR);
+
+  base.needLoan = needLoan;
+  base.monthlyPay = monthlyPay;
+  base.maxLoanByLTV = maxLoanByLTV;
+  base.maxLoanByDSR = maxLoanByDSR;
+  base.realMaxLoan = realMaxLoan;
+  base.maxMonthPay = maxMonthPay;
+
+  window.__SIM_INPUT__ = base;
+
+  const hint = document.getElementById("experimentHint");
+  if(hint){
+    if(type==="priceDown10") hint.innerHTML = `✅ 실험: <b>집값 -10%</b>`;
+    if(type==="moneyUp3000") hint.innerHTML = `✅ 실험: <b>내 돈 +3,000만</b>`;
+    if(type==="loanYearsUp10") hint.innerHTML = `✅ 실험: <b>대출기간 +10년</b>`;
+  }
+
+  runLifeSimulation();
+}
+function resetExperiment(){
+  if(window.__BASE_INPUT__){
+    window.__SIM_INPUT__ = JSON.parse(JSON.stringify(window.__BASE_INPUT__));
+    window.__BASE_INPUT__ = null;
+  }
+  const hint = document.getElementById("experimentHint");
+  if(hint) hint.innerHTML = `🔁 원래 입력값으로 복원`;
+  runLifeSimulation();
+}
+
+/* =========================================================
+   안전 최소 내돈 찾기
+========================================================= */
+function simulateWithInput(inp, mode, eventType){
+  const { yearIncome, cash, expense, rate, loanYears, needLoan, monthlyPay } = inp;
+
+  let eventIncomeMultiplier = 1;
+  let eventExpenseAdd = 0;
+  let eventCashDeduct = 0;
+  let eventStartMonth = 0;
+  let eventEndMonth = 60;
+
+  if(eventType === "jobLoss3"){ eventIncomeMultiplier = 0; eventStartMonth = 12; eventEndMonth = 15; }
+  if(eventType === "jobLoss6"){ eventIncomeMultiplier = 0; eventStartMonth = 12; eventEndMonth = 18; }
+  if(eventType === "jobLoss12"){ eventIncomeMultiplier = 0; eventStartMonth = 12; eventEndMonth = 24; }
+  if(eventType === "baby"){ eventExpenseAdd = 100; eventStartMonth = 1; eventEndMonth = 36; }
+  if(eventType === "emergency"){ eventCashDeduct = 1000; eventStartMonth = 12; eventEndMonth = 12; }
+
+  const monthlyIncome = yearIncome / 12;
+  let curCash = cash;
+  let debt = needLoan;
+  let minCash = Infinity, minMonth = 1;
+  let totalInterest = 0;
+  const series = [];
+
+  for(let m=1; m<=60; m++){
+    let income = monthlyIncome;
+    let out = expense;
+
+    if(m >= eventStartMonth && m <= eventEndMonth){
+      income *= eventIncomeMultiplier;
+      out += eventExpenseAdd;
+    }
+    if(m === eventStartMonth && eventType === "emergency"){
+      curCash -= eventCashDeduct;
+    }
+
+    const inLoanPhase = (mode==="buy");
+    if(inLoanPhase && debt>0){
+      const r = (rate/100)/12;
+      const interest = debt*r;
+      const principal = Math.max(0, monthlyPay - interest);
+      totalInterest += interest;
+      debt = Math.max(0, debt - principal);
+      out += (interest + principal);
+    }
+
+    curCash += (income - out);
+    series.push(curCash);
+
+    if(curCash < minCash){ minCash = curCash; minMonth = m; }
+  }
+
+  return { series, endCash: curCash, minCash, minMonth, totalInterest };
+}
+
+function isSafeScenario(sim, expense){
+  if(sim.minCash < 0) return false;
+  if(sim.minCash < expense * 3) return false;
+  return true;
+}
+
+function findMinMyMoneyForSafety(baseInput){
+  let low = 0;
+  let high = baseInput.housePrice;
+  let answer = null;
+
+  for(let i=0;i<30;i++){
+    let mid = Math.floor((low + high) / 2);
+
+    let test = JSON.parse(JSON.stringify(baseInput));
+    test.myMoney = mid;
+
+    test.needLoan = Math.max(0, test.housePrice - test.myMoney);
+    test.monthlyPay = annuityPayment(test.needLoan, test.rate, test.loanYears);
+
+    const sim = simulateWithInput(test, "buy", "none");
+
+    if(isSafeScenario(sim, test.expense)){
+      answer = mid;
+      high = mid;
+    } else {
+      low = mid + 1;
+    }
+  }
+
+  return answer;
+}
+
+/* =========================================================
+   비교 탭
+========================================================= */
+let CURRENT_COMPARISON = null;
+
+function showComparison(type){
+  CURRENT_COMPARISON = type;
+  
+  document.querySelectorAll('.comparison-tabs .tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  const content = document.getElementById("comparisonContent");
+  const inp = window.__SIM_INPUT__;
+  if(!inp){ content.innerHTML = "먼저 진단을 실행해주세요."; return; }
+  
+  // 광고 슬롯 초기화
+  const adSlot = document.getElementById("comparisonAdSlot");
+  adSlot.innerHTML = "";
+  
+  if(type === "loanYears"){
+    showLoanYearsComparison(inp, content);
+  }
+  if(type === "interest"){
+    showInterestComparison(inp, content);
+    // 🎯 광고 위치 2: 이자 비교 탭에서만 광고 표시
+    adSlot.innerHTML = `
+      <div class="guide-links" style="margin-top:16px">
+        <h3>💡 이자 절약 가이드</h3>
+        <ul>
+          <li>대환대출 완벽 체크리스트</li>
+          <li>금리 협상 실전 노하우</li>
+          <li>고정 vs 변동금리 선택 가이드</li>
+        </ul>
+      </div>
+    `;
+  }
+  if(type === "opportunity"){
+    showOpportunityComparison(inp, content);
+  }
+  if(type === "rateChange"){
+    showRateChangeComparison(inp, content);
+  }
+}
+
+function showLoanYearsComparison(inp, content){
+  const years = [25, 30, 45];
+  const results = [];
+  
+  years.forEach(y => {
+    const test = JSON.parse(JSON.stringify(inp));
+    test.loanYears = y;
+    test.monthlyPay = annuityPayment(test.needLoan, test.rate, y);
+    const sim = simulateWithInput(test, "buy", "none");
+    results.push({ years: y, monthlyPay: test.monthlyPay, sim });
+  });
+  
+  let html = `<div style="margin-top:12px">`;
+  html += `<h3 style="margin:0 0 10px">📊 대출 기간별 완전 비교</h3>`;
+  
+  results.forEach((r, idx) => {
+    const isCurrent = r.years === inp.loanYears;
+    html += `<div class="result-card ${isCurrent ? 'best' : ''}" style="margin-bottom:10px">`;
+    html += `<b>📌 ${r.years}년 ${isCurrent ? '(현재 선택) ✅' : ''}</b><br>`;
+    html += `월 상환액: <b>${won(r.monthlyPay)}</b>`;
+    if(idx > 0){
+      const diff = r.monthlyPay - results[0].monthlyPay;
+      html += ` (${diff > 0 ? '+' : ''}${won(diff)})`;
+    }
+    html += `<br>`;
+    html += `5년 이자: <b>${won(r.sim.totalInterest)}</b><br>`;
+    html += `5년 후 잔고: <b>${won(r.sim.endCash)}</b><br>`;
+    html += `</div>`;
+  });
+  
+  html += `<div class="info" style="margin-top:10px">`;
+  html += `🧠 <b>진단:</b><br>`;
+  html += `• 45년은 당장 생존에 유리 (월 상환 부담 낮음)<br>`;
+  html += `• 25년은 총 이자 절약 (빨리 빚 탈출)<br>`;
+  html += `• 선택은 당신의 "지금 여유" vs "총 비용"`;
+  html += `</div>`;
+  html += `</div>`;
+  
+  content.innerHTML = html;
+}
+
+function showInterestComparison(inp, content){
+  const sim = simulateWithInput(inp, "buy", "none");
+  const totalInterest = sim.totalInterest;
+  
+  let html = `<div style="margin-top:12px">`;
+  html += `<div class="highlight-box">`;
+  html += `<h3 style="margin:0 0 10px;color:white">🔥 5년간 이자로 태운 돈</h3>`;
+  html += `<div class="big">${won(totalInterest)}</div>`;
+  html += `</div>`;
+  
+  html += `<div class="info" style="margin-top:12px">`;
+  html += `<b>💀 이 돈이면...</b><br>`;
+  html += `✓ 아반떼 신차 ${(totalInterest / 1300).toFixed(1)}대<br>`;
+  html += `✓ 전세 보증금 ${won(totalInterest)} 추가<br>`;
+  html += `✓ 월세 25만원 × ${Math.floor(totalInterest / 25)}개월<br>`;
+  html += `✓ 해외여행 ${Math.floor(totalInterest / 145)}번 (1인 145만원)`;
+  html += `</div>`;
+  
+  const rates = [inp.rate - 0.5, inp.rate, inp.rate + 1];
+  html += `<h3 style="margin:20px 0 10px">🧮 금리별 5년 이자 비교</h3>`;
+  rates.forEach(r => {
+    const test = JSON.parse(JSON.stringify(inp));
+    test.rate = r;
+    test.monthlyPay = annuityPayment(test.needLoan, r, test.loanYears);
+    const s = simulateWithInput(test, "buy", "none");
+    const isCurrent = r === inp.rate;
+    html += `<div class="result-card ${isCurrent ? 'best' : ''}">`;
+    html += `금리 ${r.toFixed(1)}% ${isCurrent ? '(현재)' : ''}: <b>${won(s.totalInterest)}</b>`;
+    if(!isCurrent){
+      const diff = s.totalInterest - totalInterest;
+      html += ` (${diff > 0 ? '+' : ''}${won(diff)})`;
+    }
+    html += `</div>`;
+  });
+  
+  html += `<div class="notice" style="margin-top:10px">`;
+  html += `💡 금리 0.5%만 낮춰도 5년간 약 ${won(totalInterest * 0.1)} 절약!`;
+  html += `</div>`;
+  html += `</div>`;
+  
+  content.innerHTML = html;
+}
+
+function showOpportunityComparison(inp, content){
+  const monthlyIncome = inp.yearIncome / 12;
+  const monthlySavings = monthlyIncome - inp.expense;
+  const savings5y = monthlySavings * 60;
+  const finalCash = inp.cash + savings5y;
+  
+  const simBuy = simulateWithInput(inp, "buy", "none");
+  const cashDiff = finalCash - simBuy.endCash;
+  
+  let html = `<div style="margin-top:12px">`;
+  html += `<h3 style="margin:0 0 10px">🤔 만약 집 안 사고 5년 더 모았다면?</h3>`;
+  
+  html += `<div class="info">`;
+  html += `<b>📌 시나리오: 구매 포기 + 저축</b><br><br>`;
+  html += `• 초기 현금: ${won(inp.cash)}<br>`;
+  html += `• 월 소득: ${won(monthlyIncome)}<br>`;
+  html += `• 월 지출: ${won(inp.expense)}<br>`;
+  html += `• 매달 저축 가능: <b>${won(monthlySavings)}</b>`;
+  html += `</div>`;
+  
+  html += `<div class="highlight-box" style="margin-top:12px">`;
+  html += `<h3 style="margin:0 0 10px;color:white">💰 5년 후 모이는 돈</h3>`;
+  html += `<div class="big">${won(finalCash)}</div>`;
+  html += `<div style="margin-top:8px;font-size:14px">`;
+  html += `(초기 ${won(inp.cash)} + 저축 ${won(savings5y)})`;
+  html += `</div>`;
+  html += `</div>`;
+  
+  html += `<div class="result-card best" style="margin-top:12px">`;
+  html += `<b>🏡 이 돈이면 살 수 있는 집</b><br><br>`;
+  const possibleHouse = finalCash / 0.2;
+  html += `내 돈 ${won(finalCash)} = 집값 약 <b>${won(possibleHouse)}</b> 가능<br>`;
+  html += `(LTV 80% 가정)`;
+  html += `</div>`;
+  
+  html += `<div class="info" style="margin-top:12px">`;
+  html += `<b>💡 결론</b><br><br>`;
+  html += `[지금 산다]<br>`;
+  html += `• 5년 후 잔고: ${won(simBuy.endCash)}<br>`;
+  html += `• 5년 이자: ${won(simBuy.totalInterest)}<br><br>`;
+  html += `[5년 더 모은다]<br>`;
+  html += `• 5년 후 잔고: ${won(finalCash)}<br>`;
+  html += `• 차이: <b>${won(cashDiff)}</b> 더 여유로움!<br><br>`;
+  html += `⚠️ 단, 집값이 ${((cashDiff/inp.housePrice)*100).toFixed(0)}% 이상 오르면 역전`;
+  html += `</div>`;
+  html += `</div>`;
+  
+  content.innerHTML = html;
+}
+
+function showRateChangeComparison(inp, content){
+  const rateChanges = [0, 1, 2];
+  const results = [];
+  
+  rateChanges.forEach(change => {
+    const test = JSON.parse(JSON.stringify(inp));
+    test.rate = inp.rate + change;
+    test.monthlyPay = annuityPayment(test.needLoan, test.rate, test.loanYears);
+    const sim = simulateWithInput(test, "buy", "none");
+    results.push({ change, rate: test.rate, monthlyPay: test.monthlyPay, sim });
+  });
+  
+  let html = `<div style="margin-top:12px">`;
+  html += `<h3 style="margin:0 0 10px">📈 금리 변동 시뮬레이션</h3>`;
+  
+  results.forEach((r, idx) => {
+    const isCurrent = r.change === 0;
+    const severity = r.change === 0 ? '' : (r.change === 1 ? 'notice' : 'danger');
+    html += `<div class="${severity ? severity : 'result-card'}" style="margin-bottom:10px;${!severity ? 'border:1px solid var(--line);padding:14px;border-radius:14px' : ''}">`;
+    html += `<b>${isCurrent ? '현재 금리' : `금리 +${r.change}%p`} (${r.rate.toFixed(1)}%) ${isCurrent ? '✅' : ''}</b><br>`;
+    html += `→ 월 상환액: <b>${won(r.monthlyPay)}</b>`;
+    if(idx > 0){
+      const diff = r.monthlyPay - results[0].monthlyPay;
+      html += ` (+${won(diff)} ${r.change === 2 ? '🚨' : '⚠️'})`;
+    }
+    html += `<br>`;
+    html += `→ 5년 후 잔고: <b>${won(r.sim.endCash)}</b>`;
+    if(idx > 0){
+      const diff = r.sim.endCash - results[0].sim.endCash;
+      html += ` (${won(diff)})`;
+    }
+    html += `</div>`;
+  });
+  
+  html += `<div class="info" style="margin-top:10px">`;
+  html += `🧠 <b>진단:</b><br>`;
+  html += `금리가 2%p 오르면 월 ${won(results[2].monthlyPay - results[0].monthlyPay)} 더 냅니다.<br>`;
+  html += `변동금리라면 고정금리 전환을 고려하세요.`;
+  html += `</div>`;
+  html += `</div>`;
+  
+  content.innerHTML = html;
+}
+
+/* =========================================================
+   이벤트 시뮬레이션
+========================================================= */
+function runEventSimulation(){
+  const inp = window.__SIM_INPUT__;
+  if(!inp){ alert("먼저 진단을 실행해주세요."); return; }
+  
+  const eventType = document.getElementById("eventType").value;
+  const resultDiv = document.getElementById("eventResult");
+  
+  if(eventType === "none"){
+    resultDiv.innerHTML = "";
+    return;
+  }
+  
+  const sim = simulateWithInput(inp, "buy", eventType);
+  
+  let html = `<div class="info">`;
+  html += `<b>🧪 이벤트 시뮬 결과</b><br><br>`;
+  
+  let eventName = "";
+  if(eventType.startsWith("jobLoss")) eventName = `실직 ${eventType.slice(-1) === '3' ? '3개월' : eventType.slice(-1) === '6' ? '6개월' : '12개월'}`;
+  if(eventType === "baby") eventName = "육아 (월 +100만원, 3년)";
+  if(eventType === "emergency") eventName = "긴급 지출 1,000만원";
+  
+  html += `이벤트: <b>${eventName}</b><br>`;
+  html += `통장 최저점: <b>${won(sim.minCash)}</b> (${sim.minMonth}개월차)<br>`;
+  html += `5년 후 잔고: <b>${won(sim.endCash)}</b><br><br>`;
+  
+  if(sim.minCash < 0){
+    html += `🚨 <b>위험:</b> 통장이 마이너스가 됩니다!<br>`;
+    html += `비상 자금 <b>${won(Math.abs(sim.minCash))}</b> 추가 필요`;
+  }else if(sim.minCash < inp.expense * 3){
+    html += `⚠️ <b>주의:</b> 최저 잔고가 ${(sim.minCash / inp.expense).toFixed(1)}개월치로 빠듯합니다.`;
+  }else{
+    html += `✅ <b>안전:</b> 이벤트 발생해도 버틸 수 있습니다.`;
+  }
+  
+  html += `</div>`;
+  resultDiv.innerHTML = html;
+}
+
+/* =========================================================
+   메인 시뮬레이션
+========================================================= */
+function runLifeSimulation(){
+  const inp = window.__SIM_INPUT__;
+  if(!inp){ alert("먼저 DSR/LTV 검사를 통과해야 합니다."); return; }
+
+  const {
+    yearIncome, cash, expense,
+    housePrice, myMoney,
+    rate, loanYears, needLoan, monthlyPay, maxMonthPay
+  } = inp;
+
+  const base = JSON.parse(JSON.stringify(inp));
+  const minMoney = findMinMyMoneyForSafety(base);
+
+  let goalMsg = "";
+  if(minMoney === null){
+    goalMsg = "❌ 이 집은 내 돈을 아무리 넣어도 현재 소득/지출로는 5년 안전 기준 미달.";
+  } else {
+    goalMsg += `• 이 집을 <b>안전하게</b> 사려면: 내 돈 최소 <b>${minMoney.toLocaleString()}만원</b><br>`;
+    if(minMoney > base.myMoney){
+      goalMsg += `→ 지금보다 <b>${(minMoney - base.myMoney).toLocaleString()}만원</b> 더 필요`;
+    } else {
+      goalMsg += `→ 현재 내 돈으로도 "안전 기준" 통과 ✅`;
+    }
+  }
+  const goalBox = document.getElementById("goalText");
+  if(goalBox) goalBox.innerHTML = goalMsg;
+
+  const A = simulateWithInput(inp, "buy", "none");
+  const B = simulateWithInput(inp, "save", "none");
+
+  const results = [
+    { key:"A", name:"🏠 지금 산다", data:A },
+    { key:"B", name:"💰 돈 더 모아서 산다", data:B }
+  ];
+
+  function score(r){
+    let s = r.data.endCash;
+    if(r.data.minCash < 0) s -= 50000;
+    s -= Math.max(0, (0 - r.data.minCash)) * 2;
+    return s;
+  }
+  results.sort((a,b)=> score(b)-score(a));
+  const best = results[0];
+
+  showStep(3);
+
+  document.getElementById("summaryLine").innerText =
+    `지금 기준, 제일 덜 위험한 선택은 → ${best.name}`;
+  document.getElementById("summarySub").innerText =
+    `"버틸 수 있냐" 기준으로 5년을 굴렸을 때 가장 안정적인 선택입니다.`;
+
+  const d = diagnose(inp);
+  document.getElementById("lifeStructureText").innerHTML = d.structureLines.join("<br>");
+  
+  const bottleneckList = document.getElementById("bottleneckList");
+  bottleneckList.innerHTML = "";
+  d.bottlenecks.forEach((b, idx) => {
+    const li = document.createElement("li");
+    li.className = b.level;
+    li.innerHTML = `<b>${idx+1}. ${b.title}</b><br>${b.desc}`;
+    bottleneckList.appendChild(li);
+  });
+
+  const solutions = suggestSolutions(inp, d);
+  const solutionText = document.getElementById("solutionText");
+  if(solutions.length){
+    let html = "";
+    solutions.forEach(s => {
+      html += `${s.icon} <b>${s.title}</b><br>${s.desc}<br><br>`;
+    });
+    solutionText.innerHTML = html;
+  }else{
+    solutionText.innerHTML = "현재 상태가 양호합니다. 👍";
+  }
+
+  const hint = document.getElementById("experimentHint");
+  if(hint && (!hint.innerText || !hint.innerText.trim())){
+    hint.innerHTML = `예: "집값 -10%" 누르면 즉시 재계산됩니다.`;
+  }
+
+  const warnBox = document.getElementById("warnBox");
+  warnBox.innerHTML = "";
+  if(best.data.minCash < 0){
+    warnBox.innerHTML = `<div class="danger"><b>⚠️ 경고</b> · 추천 선택도 중간에 통장이 마이너스될 수 있습니다.</div>`;
+  } else if(best.data.minCash < expense*3){
+    warnBox.innerHTML = `<div class="notice"><b>⚠️ 주의</b> · 중간에 돈이 꽤 빠듯할 수 있습니다.</div>`;
+  }
+
+  const box = document.getElementById("resultCards");
+  box.innerHTML = "";
+  results.forEach((r, idx)=>{
+    const dd = r.data;
+    const div = document.createElement("div");
+    div.className = "result-card" + (idx===0 ? " best" : "");
+    div.innerHTML = `
+      <b>${r.name} ${idx===0 ? "· ✅ 추천" : ""}</b><br><br>
+      👉 5년 후 통장: <b>${Math.round(dd.endCash).toLocaleString()}</b> 만원<br>
+      👉 최저 잔고: <b>${Math.round(dd.minCash).toLocaleString()}</b> 만원 (${dd.minMonth}개월차)<br>
+      ${r.key === 'A' ? `👉 5년 이자: <b>${Math.round(dd.totalInterest).toLocaleString()}</b> 만원` : ''}
+    `;
+    box.appendChild(div);
+  });
+
+  let explain = `DSR 통과는 "은행이 허용하는 월 상환 한도(약 ${Math.floor(maxMonthPay).toLocaleString()}만원)" 안에 들어왔다는 뜻입니다. `;
+  explain += `이 시뮬은 5년 뒤 잔고뿐 아니라, 중간에 통장이 마르는 순간(최저 잔고)을 같이 봐야 현실적입니다.`;
+  document.getElementById("explainText").innerText = explain;
+
+  const ctx = document.getElementById("cashChart").getContext("2d");
+  if(window.__ALK_CHART__) window.__ALK_CHART__.destroy();
+
+  window.__ALK_CHART__ = new Chart(ctx, {
+    type:"line",
+    data:{
+      labels:Array.from({length:60}, (_,i)=> (i+1)+"개월"),
+      datasets:[
+        { label:"🏠 지금 산다", data:A.series, borderWidth:2, borderColor:"#2563eb", backgroundColor:"rgba(37,99,235,0.1)" },
+        { label:"💰 돈 더 모아서 산다", data:B.series, borderWidth:2, borderColor:"#16a34a", backgroundColor:"rgba(22,163,74,0.1)" }
+      ]
+    },
+    options:{
+      responsive:true,
+      interaction:{mode:"index",intersect:false},
+      plugins:{ legend:{ labels:{ color:"#0f172a" } } },
+      scales:{
+        x:{ ticks:{ color:"#64748b" }, grid:{ color:"rgba(15,23,42,.06)" } },
+        y:{ ticks:{ color:"#64748b" }, grid:{ color:"rgba(15,23,42,.06)" } }
+      }
+    }
+  });
+  
+  if(CURRENT_COMPARISON){
+    showComparison(CURRENT_COMPARISON);
+  }else{
+    showComparison('loanYears');
+  }
+}
+
+/* =========================================================
+   초기화
+========================================================= */
+(function init(){
+  const ruleInfo = document.getElementById("ruleInfo");
+  if(ruleInfo){
+    ruleInfo.innerHTML = `0단계에서 지역을 고르면 LTV/DSR이 자동 적용됩니다.`;
+  }
+  
+  setupRealtimeFeedback();
+})();
+</script>
+
+</body>
+</html>
