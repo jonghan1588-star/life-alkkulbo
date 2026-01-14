@@ -421,28 +421,28 @@ hr{border:none;border-top:1px solid var(--line);margin:12px 0}
 
   <div class="card">
     <div class="chipgrid">
-      <div class="chip" onclick="selectRegion('seoul')">서울
+      <div class="chip" onclick="selectRegion('seoul', this)">서울
         <small>LTV 40 / DSR 40</small>
       </div>
-      <div class="chip" onclick="selectRegion('gg_incheon')">경기·인천
+      <div class="chip" onclick="selectRegion('gg_incheon', this)">경기·인천
         <small>LTV 50 / DSR 40</small>
       </div>
-      <div class="chip" onclick="selectRegion('metro_core')">광역시(과열)
+      <div class="chip" onclick="selectRegion('metro_core', this)">광역시(과열)
         <small>LTV 60 / DSR 45</small>
       </div>
-      <div class="chip" onclick="selectRegion('metro')">광역시(일반)
+      <div class="chip" onclick="selectRegion('metro', this)">광역시(일반)
         <small>LTV 70 / DSR 45</small>
       </div>
-      <div class="chip" onclick="selectRegion('local_city')">지방 도시
+      <div class="chip" onclick="selectRegion('local_city', this)">지방 도시
         <small>LTV 75 / DSR 50</small>
       </div>
-      <div class="chip" onclick="selectRegion('local')">지방(기타)
+      <div class="chip" onclick="selectRegion('local', this)">지방(기타)
         <small>LTV 80 / DSR 50</small>
       </div>
     </div>
 
     <div style="margin-top:12px">
-      <div class="chip" onclick="selectRegion('custom')">✏️ 기타 (직접입력)
+      <div class="chip" onclick="selectRegion('custom', this)">기타 (직접입력)
         <small>내 조건에 맞게 LTV/DSR 설정</small>
       </div>
     </div>
@@ -1009,24 +1009,23 @@ function setupRealtimeFeedback(){
   }
 }
 
-/* =========================================================
-   지역 선택
-========================================================= */
-function selectRegion(key){
+function selectRegion(key, el){
   document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-  
+
+  if(el){
+    el.classList.add('active');
+  }
+
   if(key === 'custom'){
     const customDiv = document.getElementById("customRegion");
     customDiv.classList.add("active");
-    
-    event.target.closest('.chip').classList.add('active');
-    
+
     CURRENT_REGION_KEY = 'custom';
-    
+
     const applyCustom = ()=>{
       const ltv = Number(document.getElementById("customLTV").value || 0);
       const dsr = Number(document.getElementById("customDSR").value || 0);
-      
+
       if(ltv > 0 && dsr > 0){
         CURRENT_REGION = {
           name: "기타(직접입력)",
@@ -1035,26 +1034,24 @@ function selectRegion(key){
           note: "사용자 지정 규제",
           custom: true
         };
-        
         updateRegionDisplay();
       }
     };
-    
-    document.getElementById("customLTV").addEventListener("change", applyCustom);
-    document.getElementById("customDSR").addEventListener("change", applyCustom);
-    
+
+    document.getElementById("customLTV").onchange = applyCustom;
+    document.getElementById("customDSR").onchange = applyCustom;
+
     return;
   }
-  
+
   document.getElementById("customRegion").classList.remove("active");
-  
+
   CURRENT_REGION = REGION_RULES[key];
   CURRENT_REGION_KEY = key;
-  
-  event.target.closest('.chip').classList.add('active');
-  
+
   updateRegionDisplay();
 }
+
 
 function updateRegionDisplay(){
   const box = document.getElementById("regionBox");
